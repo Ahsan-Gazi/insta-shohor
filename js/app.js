@@ -15,6 +15,11 @@ const isLiked = (id) => {
     return likedPostsId?.length && !!likedPostsId.includes(id);
 };
 
+// Adding by me
+const isReported = (id) => {
+  return reportedPostsId?.length && !!reportedPostsId.includes(id);
+};
+
 const addToLiked = (id) => {
     // likedPostsId.plus(id); 
     likedPostsId.push(id); 
@@ -23,8 +28,10 @@ const addToLiked = (id) => {
 
 const reportPost = (id) => {
     reportedPostsId.push(id);
-    const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
-    showPosts(remainingPosts);
+      const remainingPosts = posts.filter((post) => !reportedPostsId.includes(post.id));
+      // const remainingPosts = posts.filter((post) => reportedPostsId.includes(post.id));
+       showPosts(remainingPosts);
+    //showPosts(posts);
 };
 
 const displayContent = (text) => {
@@ -104,12 +111,14 @@ const createPost = (post) => {
 
                   <div class="post__indicators"></div>
 
-                  <button class="post__button post__button--align-right" onclick="reportPost(${
-                      post.id
-                  })">
-                    <i class="fa-solid fa-ban"></i>
+                  <button class="post__button--align-right" onclick="reportPost(${post.id})">
+                  <i class="fa-solid fa-ban ${isReported(post.id) && "text-danger"}"></i>
+                    
                   </button>
-                </div>
+            
+                
+                
+                  </div>
 
                 <div class="post__content">${displayContent(post.description)}</div>
 
@@ -161,7 +170,9 @@ const displayLikedPosts = () => {
 
 const displayReportedPosts = () => {
     const reportedPosts = getReportedPosts();
-    posts.forEach((post) => {
+    // modified reportedPost instead of posts in forEach
+
+    reportedPosts.forEach((post) => {
         const div = createPost(post);
         document.getElementById( "reported" ).appendChild(div);
     });
@@ -174,3 +185,14 @@ const loadPosts = async () =>{
 }
 
 loadPosts();
+
+
+{/* <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
+<i class="fa-solid fa-ban">${isReported(post.id)}</i>
+</button> */}
+
+
+
+{/* <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
+<i class="fa-solid fa-ban">${isReported(post.id)}</i>
+</button> */}
