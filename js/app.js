@@ -111,7 +111,7 @@ const createPost = (post) => {
 
                   <div class="post__indicators"></div>
 
-                  <button class="post__button--align-right" onclick="reportPost(${post.id})">
+                  <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
                   <i class="fa-solid fa-ban ${isReported(post.id) && "text-danger"}"></i>
                     
                   </button>
@@ -172,6 +172,7 @@ const displayLikedPosts = () => {
 
 const displayReportedPosts = () => {
     const reportedPosts = getReportedPosts();
+    document.getElementById('reported').innerHTML='';
     // modified reportedPost instead of posts in forEach
 
     reportedPosts.forEach((post) => {
@@ -189,9 +190,9 @@ const loadPosts = async () =>{
 loadPosts();
 
 
-{/* <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
-<i class="fa-solid fa-ban">${isReported(post.id)}</i>
-</button> */}
+// { <button class="post__button post__button--align-right" onclick="reportPost(${post.id})">
+// <i class="fa-solid fa-ban">${isReported(post.id)}</i>
+// </button> }
 
 
 
